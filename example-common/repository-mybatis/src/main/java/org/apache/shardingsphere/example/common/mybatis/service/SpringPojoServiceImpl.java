@@ -108,4 +108,30 @@ public class SpringPojoServiceImpl implements SpringPojoService {
             System.out.println(each);
         }
     }
+
+	@Override
+	public void processBatchSuccess() {
+		 System.out.println("---------------------------- processBatchSuccess Data ----------------------------");
+		 List<Order> orders = new ArrayList<>();
+	        
+	       
+	       
+	        List<Long> result = new ArrayList<>(10);
+	        for (int i = 1; i <= 10; i++) {
+	            Order order = new Order();
+	            order.setUserId(i);
+	            order.setStatus("INSERT_TEST");
+	            orders.add(order);
+
+//	            OrderItem item = new OrderItem();
+//	            item.setOrderId(order.getOrderId());
+//	            item.setUserId(i);
+//	            item.setStatus("INSERT_TEST");
+//	            orderItemRepository.insert(item);
+//	            result.add(order.getOrderId());
+	        }
+	     orderRepository.batchInserts(orders);
+	        // return result;
+		
+	}
 }

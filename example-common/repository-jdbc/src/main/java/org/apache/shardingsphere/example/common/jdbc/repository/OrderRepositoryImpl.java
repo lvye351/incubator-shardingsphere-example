@@ -21,6 +21,10 @@ import org.apache.shardingsphere.example.common.entity.Order;
 import org.apache.shardingsphere.example.common.repository.OrderRepository;
 
 import javax.sql.DataSource;
+	
+	import static org.hamcrest.CoreMatchers.is;
+	import static org.junit.Assert.assertThat;
+	
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -39,7 +43,7 @@ public class OrderRepositoryImpl implements OrderRepository {
     
     @Override
     public void createTableIfNotExists() {
-        String sql = "CREATE TABLE IF NOT EXISTS t_order (order_id BIGINT NOT NULL AUTO_INCREMENT, user_id INT NOT NULL, status VARCHAR(50), PRIMARY KEY (order_id))";
+        String sql = "CREATE TABLE IF NOT EXISTS t_order (order_id VARCHAR(50) NOT NULL , user_id INT NOT NULL, status VARCHAR(50), PRIMARY KEY (order_id))";
         try (Connection connection = dataSource.getConnection();
              Statement statement = connection.createStatement()) {
             statement.executeUpdate(sql);
@@ -85,6 +89,57 @@ public class OrderRepositoryImpl implements OrderRepository {
         return order.getOrderId();
     }
     
+    public void batchInserts(List<Order> orders)
+    {
+
+        String sql = "INSERT INTO t_order (user_id, status) VALUES (?, ?)";
+       
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+        	 for(int i = 0;i<orders.size();i++)
+        	 {
+        		 Order order = orders.get(i);
+        		 preparedStatement.setInt(1, order.getUserId());
+                 preparedStatement.setString(2, order.getStatus());
+                 preparedStatement.addBatch();
+        	 }
+        	 int[] result = preparedStatement.executeBatch();
+             
+           
+        } catch (final SQLException ignored) {
+        	ignored.printStackTrace();
+        }
+        
+    
+    }
+    
+//    public Long[] insertALL(final List<Order> orders) {
+//        String sql = "INSERT INTO t_order (user_id, status) VALUES (?, ?)";
+//       
+//        try (Connection connection = dataSource.getConnection();
+//             PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+//        	 for(int i = 0;i<orders.size();i++)
+//        	 {
+//        		 Order order = orders.get(i);
+//        		 preparedStatement.setInt(1, order.getUserId());
+//                 preparedStatement.setString(2, order.getStatus());
+//                 preparedStatement.addBatch();
+//        	 }
+//        	 preparedStatement.executeBatch();
+//        	 int[] result = preparedStatement.executeBatch();
+//             for (int rs : result) {
+//                 assertThat(rs, is(1));
+//             }
+////            try (ResultSet resultSet = preparedStatement.getGeneratedKeys()) {
+////                if (resultSet.next()) {
+////                    order.setOrderId(resultSet.getLong(1));
+////                }
+////            }
+//        } catch (final SQLException ignored) {
+//        }
+//        return order.getOrderId();
+//    }
+    
     @Override
     public void delete(final Long orderId) {
         String sql = "DELETE FROM t_order WHERE order_id=?";
@@ -118,4 +173,26 @@ public class OrderRepositoryImpl implements OrderRepository {
         }
         return result;
     }
+
+	@Override
+	public void batchUpdates(List<Order> orders) {
+		String sql = "update t_order set  status = ? where status =?";
+	       
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+        	 for(int i = 0;i<orders.size();i++)
+        	 {
+        		 Order order = orders.get(i);
+        		 preparedStatement.setString(1, "batch update");
+                 preparedStatement.setString(2, order.getStatus());
+                 preparedStatement.addBatch();
+        	 }
+        	 int[] result = preparedStatement.executeBatch();
+             
+           
+        } catch (final SQLException ignored) {
+        	ignored.printStackTrace();
+        }
+		
+	}
 }

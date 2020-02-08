@@ -17,6 +17,7 @@
 
 package org.apache.shardingsphere.example.common.jpa.repository;
 
+import org.apache.shardingsphere.example.common.entity.Order;
 import org.apache.shardingsphere.example.common.entity.User;
 import org.apache.shardingsphere.example.common.repository.UserRepository;
 import org.springframework.stereotype.Repository;
@@ -67,4 +68,16 @@ public class UserRepositoryImpl implements UserRepository {
     public List<User> selectAll() {
         return (List<User>) entityManager.createQuery("SELECT o FROM UserEntiy o").getResultList();
     }
+
+	@Override
+	public void batchInserts(List<Order> orders) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void batchUpdates(List<Order> orders) {
+		// TODO Auto-generated method stub
+		
+	}
 }

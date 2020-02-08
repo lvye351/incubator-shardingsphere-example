@@ -17,6 +17,7 @@
 
 package org.apache.shardingsphere.example.common.jdbc.repository;
 
+import org.apache.shardingsphere.example.common.entity.Order;
 import org.apache.shardingsphere.example.common.entity.User;
 import org.apache.shardingsphere.example.common.repository.UserRepository;
 
@@ -116,4 +117,16 @@ public final class UserRepositoryImpl implements UserRepository {
         }
         return result;
     }
+
+	@Override
+	public void batchInserts(List<Order> orders) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void batchUpdates(List<Order> orders) {
+		// TODO Auto-generated method stub
+		
+	}
 }

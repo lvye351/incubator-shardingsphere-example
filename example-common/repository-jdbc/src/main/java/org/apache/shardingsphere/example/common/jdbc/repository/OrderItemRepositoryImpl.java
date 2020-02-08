@@ -17,6 +17,7 @@
 
 package org.apache.shardingsphere.example.common.jdbc.repository;
 
+import org.apache.shardingsphere.example.common.entity.Order;
 import org.apache.shardingsphere.example.common.entity.OrderItem;
 import org.apache.shardingsphere.example.common.repository.OrderItemRepository;
 
@@ -121,4 +122,16 @@ public class OrderItemRepositoryImpl implements OrderItemRepository {
         }
         return result;
     }
+
+	@Override
+	public void batchInserts(List<Order> orders) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void batchUpdates(List<Order> orders) {
+		// TODO Auto-generated method stub
+		
+	}
 }

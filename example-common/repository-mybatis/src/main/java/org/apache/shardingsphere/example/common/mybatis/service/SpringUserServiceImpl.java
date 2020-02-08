@@ -88,4 +88,10 @@ public class SpringUserServiceImpl implements UserService {
             System.out.println(each);
         }
     }
+
+	@Override
+	public void processBatchSuccess() {
+		// TODO Auto-generated method stub
+		
+	}
 }

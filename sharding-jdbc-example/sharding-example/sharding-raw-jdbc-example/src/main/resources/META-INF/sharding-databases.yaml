@@ -10,13 +10,16 @@ dataSources:
     username: root
     password:
 
+
 shardingRule:
+  defaultKeyGenerator:
+    type: SNOWFLAKE
+    column: order_id
+  
   tables:
     t_order: 
       actualDataNodes: ds_${0..1}.t_order
-      keyGenerator:
-        type: SNOWFLAKE
-        column: order_id
+
     t_order_item:
       actualDataNodes: ds_${0..1}.t_order_item
       keyGenerator:
@@ -32,4 +35,4 @@ shardingRule:
     none:
 
 props:
-  sql.show: false
+  sql.show: true

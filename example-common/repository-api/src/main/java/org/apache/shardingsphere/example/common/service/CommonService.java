@@ -28,5 +28,7 @@ public interface CommonService {
     void processFailure();
     
     void printData();
+
+	void processBatchSuccess();
     
 }

@@ -17,6 +17,7 @@
 
 package org.apache.shardingsphere.example.common.jpa.service;
 
+import org.apache.shardingsphere.example.common.entity.Order;
 import org.apache.shardingsphere.example.common.jpa.entity.OrderEntity;
 import org.apache.shardingsphere.example.common.jpa.entity.OrderItemEntity;
 import org.apache.shardingsphere.example.common.repository.OrderItemRepository;
@@ -51,7 +52,7 @@ public class JPACommonServiceImpl implements JPACommonService {
         System.out.println("-------------- Process Success Begin ---------------");
         List<Long> orderIds = insertData();
         printData();
-        deleteData(orderIds);
+        //deleteData(orderIds);
         printData();
         System.out.println("-------------- Process Success Finish --------------");
     }
@@ -102,4 +103,31 @@ public class JPACommonServiceImpl implements JPACommonService {
             System.out.println(each);
         }
     }
+
+	@Override
+	public void processBatchSuccess() {
+		 System.out.println("---------------------------- Insert Data ----------------------------");
+//	        List<Long> result = new ArrayList<>(10);
+//	        for (int i = 1; i <= 10; i++) {
+//	            OrderEntity order = new OrderEntity();
+//	            order.setUserId(i);
+//	            order.setStatus("INSERT_TEST_JPA");
+//	            orderRepository.insert(order);
+//	            
+//	        }
+	        List<Order> orders = new ArrayList<>();
+	        Order o1 = new Order();
+	        o1.setUserId(800);
+	        o1.setStatus("111111111test");
+	        orders.add(o1);
+
+	        Order o2 = new Order();
+	        o2.setUserId(801);
+	        o2.setStatus("2222222222222222");
+	        orders.add(o2);
+	        orderRepository.batchInserts(orders);
+	        //System.out.println(orderRepository.selectAll());
+	        //orderRepository.batchInserts(orders);
+		
+	}
 }

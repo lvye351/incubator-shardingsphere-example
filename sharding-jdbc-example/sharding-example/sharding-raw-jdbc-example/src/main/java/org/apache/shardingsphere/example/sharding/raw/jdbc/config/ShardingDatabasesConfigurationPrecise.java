@@ -39,18 +39,23 @@ public final class ShardingDatabasesConfigurationPrecise implements ExampleConfi
         shardingRuleConfig.getTableRuleConfigs().add(getOrderTableRuleConfiguration());
         shardingRuleConfig.getTableRuleConfigs().add(getOrderItemTableRuleConfiguration());
         shardingRuleConfig.setDefaultDatabaseShardingStrategyConfig(new InlineShardingStrategyConfiguration("user_id", "demo_ds_${user_id % 2}"));
-        return ShardingDataSourceFactory.createDataSource(createDataSourceMap(), shardingRuleConfig, new Properties());
+        //设置默认主键生成算法，必须设置字段，否则无效；没意义
+        shardingRuleConfig.setDefaultKeyGeneratorConfig
+        (new KeyGeneratorConfiguration("SNOWFLAKE","order_id"));
+        Properties p = new Properties();
+        p.setProperty("sql.show", "true");
+        return ShardingDataSourceFactory.createDataSource(createDataSourceMap(), shardingRuleConfig, p);
     }
     
     private static TableRuleConfiguration getOrderTableRuleConfiguration() {
         TableRuleConfiguration result = new TableRuleConfiguration("t_order");
-        result.setKeyGeneratorConfig(new KeyGeneratorConfiguration("SNOWFLAKE", "order_id", new Properties()));
+        //result.setKeyGeneratorConfig(new KeyGeneratorConfiguration("UUID", "order_id", new Properties()));
         return result;
     }
     
     private static TableRuleConfiguration getOrderItemTableRuleConfiguration() {
         TableRuleConfiguration result = new TableRuleConfiguration("t_order_item");
-        result.setKeyGeneratorConfig(new KeyGeneratorConfiguration("SNOWFLAKE", "order_item_id", new Properties()));
+        //result.setKeyGeneratorConfig(new KeyGeneratorConfiguration("SNOWFLAKE", "order_item_id", new Properties()));
         return result;
     }
     

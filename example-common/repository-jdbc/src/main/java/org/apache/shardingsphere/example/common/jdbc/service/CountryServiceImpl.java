@@ -98,4 +98,10 @@ public class CountryServiceImpl implements CommonService {
         }
         return new ArrayList<>(result);
     }
+
+	@Override
+	public void processBatchSuccess() {
+		// TODO Auto-generated method stub
+		
+	}
 }

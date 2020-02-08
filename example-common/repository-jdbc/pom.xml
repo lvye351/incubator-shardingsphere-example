@@ -6,9 +6,9 @@
     <parent>
         <groupId>org.apache.shardingsphere.example</groupId>
         <artifactId>example-common</artifactId>
-        <version>4.0.0-RC1</version>
+        <version>4.0.0-RC4-SNAPSHOT</version>
     </parent>
-    <artifactId>repository-jdbc</artifactId>
+    <artifactId>zdaas-repository-jdbc</artifactId>
 
     <dependencies>
         <dependency>

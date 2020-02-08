@@ -44,7 +44,7 @@ public class YamlConfigurationExample {
         CommonService commonService = getCommonService(dataSource);
         commonService.initEnvironment();
         commonService.processSuccess();
-        commonService.cleanEnvironment();
+      //commonService.cleanEnvironment();
     }
     
     private static CommonService getCommonService(final DataSource dataSource) {

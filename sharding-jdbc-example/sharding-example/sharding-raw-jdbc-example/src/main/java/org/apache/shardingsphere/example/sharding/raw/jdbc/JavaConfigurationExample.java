@@ -42,8 +42,9 @@ public class JavaConfigurationExample {
         DataSource dataSource = DataSourceFactory.newInstance(shardingType);
         CommonService commonService = getCommonService(dataSource);
         commonService.initEnvironment();
-        commonService.processSuccess();
-        commonService.cleanEnvironment();
+        // commonService.processSuccess(); 
+        commonService.processBatchSuccess();
+        //commonService.cleanEnvironment();
     }
     
     private static CommonService getCommonService(final DataSource dataSource) {

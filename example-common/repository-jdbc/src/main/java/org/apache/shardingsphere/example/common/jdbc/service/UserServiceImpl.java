@@ -89,4 +89,10 @@ public final class UserServiceImpl implements CommonService {
             System.out.println(each);
         }
     }
+
+	@Override
+	public void processBatchSuccess() {
+		// TODO Auto-generated method stub
+		
+	}
 }

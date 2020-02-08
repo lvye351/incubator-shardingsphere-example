@@ -35,8 +35,9 @@ public class SpringBootMybatisMain {
         try (ConfigurableApplicationContext applicationContext = SpringApplication.run(SpringBootMybatisMain.class, args)) {
             CommonService commonService = applicationContext.getBean(SpringPojoService.class);
             commonService.initEnvironment();
-            commonService.processSuccess();
-            commonService.cleanEnvironment();
+            //commonService.processSuccess();
+            commonService.processBatchSuccess();
+            //commonService.cleanEnvironment();
         }
     }
 }

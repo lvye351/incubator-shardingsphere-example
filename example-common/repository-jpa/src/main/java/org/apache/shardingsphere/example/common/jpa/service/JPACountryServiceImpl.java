@@ -94,4 +94,10 @@ public class JPACountryServiceImpl implements JPACountryService {
         }
         return new ArrayList<>(result);
     }
+
+	@Override
+	public void processBatchSuccess() {
+		// TODO Auto-generated method stub
+		
+	}
 }

@@ -18,6 +18,7 @@
 package org.apache.shardingsphere.example.common.jdbc.repository;
 
 import org.apache.shardingsphere.example.common.entity.Country;
+import org.apache.shardingsphere.example.common.entity.Order;
 import org.apache.shardingsphere.example.common.repository.CountryRepository;
 
 import javax.sql.DataSource;
@@ -115,4 +116,16 @@ public final class CountryRepositoryImpl implements CountryRepository {
         }
         return result;
     }
+
+	@Override
+	public void batchInserts(List<Order> orders) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void batchUpdates(List<Order> orders) {
+		// TODO Auto-generated method stub
+		
+	}
 }

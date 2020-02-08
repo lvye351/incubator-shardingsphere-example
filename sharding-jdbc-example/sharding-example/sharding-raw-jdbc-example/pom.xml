@@ -6,19 +6,20 @@
     <parent>
         <groupId>org.apache.shardingsphere.example</groupId>
         <artifactId>sharding-example</artifactId>
-        <version>4.0.0-RC1</version>
+        <version>4.0.0-RC4-SNAPSHOT</version>
     </parent>
     <artifactId>sharding-raw-jdbc-example</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>org.apache.shardingsphere.example</groupId>
-            <artifactId>repository-jdbc</artifactId>
+            <artifactId>zdaas-repository-jdbc</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.shardingsphere</groupId>
-            <artifactId>sharding-jdbc-core</artifactId>
+            <artifactId>zdaas-jdbc-core</artifactId>
+             <version>4.0.0-RC4-SNAPSHOT</version>
         </dependency>
     </dependencies>
 </project>

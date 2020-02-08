@@ -17,6 +17,7 @@
 
 package org.apache.shardingsphere.example.common.jpa.repository;
 
+import org.apache.shardingsphere.example.common.entity.Order;
 import org.apache.shardingsphere.example.common.entity.OrderItem;
 import org.apache.shardingsphere.example.common.repository.OrderItemRepository;
 import org.springframework.stereotype.Repository;
@@ -67,4 +68,16 @@ public class OrderItemRepositoryImpl implements OrderItemRepository {
     public List<OrderItem> selectAll() {
         return (List<OrderItem>) entityManager.createQuery("SELECT i FROM OrderEntity o, OrderItemEntity i WHERE o.orderId = i.orderId").getResultList();
     }
+
+	@Override
+	public void batchInserts(List<Order> orders) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void batchUpdates(List<Order> orders) {
+		// TODO Auto-generated method stub
+		
+	}
 }

@@ -101,4 +101,10 @@ public class SpringCountryServiceImpl implements SpringCountryService {
         }
         return new ArrayList<>(result);
     }
+
+	@Override
+	public void processBatchSuccess() {
+		// TODO Auto-generated method stub
+		
+	}
 }

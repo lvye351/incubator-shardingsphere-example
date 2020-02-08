@@ -39,6 +39,7 @@ public final class CommonServiceImpl implements CommonService {
 
     @Override
     public void initEnvironment() {
+    	cleanEnvironment();
         orderRepository.createTableIfNotExists();
         orderItemRepository.createTableIfNotExists();
         orderRepository.truncateTable();
@@ -56,12 +57,72 @@ public final class CommonServiceImpl implements CommonService {
         System.out.println("-------------- Process Success Begin ---------------");
         List<Long> orderIds = insertData();
         printData();
-        deleteData(orderIds);
+        //deleteData(orderIds);
+        printData();
+        System.out.println("-------------- Process Success Finish --------------");
+    }
+    /**
+     * 测试批量update
+     */
+    @Override
+    public void processBatchSuccess() {
+        System.out.println("-------------- Process Success Begin ---------------");
+        List<Long> orderIds = insertBatchData();
+        printData();
+        //orderIds = 
+        // updateBatchData(orderIds);
+        //printData();
+        //deleteDa	ta(orderIds);
         printData();
         System.out.println("-------------- Process Success Finish --------------");
     }
 
-    @Override
+    private List<Long> insertBatchData() {
+    	 System.out.println("---------------------------- Insert Data ----------------------------");
+         List<Long> result = new ArrayList<>(10);
+         List<Order> orders = new ArrayList<>(10);
+         for (int i = 1; i <= 10; i++) {
+             Order order = new Order();
+             order.setUserId(i);
+             order.setStatus("INSERT_TEST_batch");
+             orders.add(order);
+             //orderRepository.insert(order);
+             OrderItem item = new OrderItem();
+             item.setOrderId(order.getOrderId());
+             item.setUserId(i);
+             item.setStatus("INSERT_TEST");
+             orderItemRepository.insert(item);
+             result.add(order.getOrderId());
+         }
+         orderRepository.batchInserts(orders);
+         //批量插入后再批量更新
+         orderRepository.batchUpdates(orders);
+
+
+         return result;
+	}
+    private void updateBatchData(List<Long> orderIds) {
+   	 System.out.println("---------------------------- Insert Data ----------------------------");
+        List<Long> result = new ArrayList<>(10);
+        List<Order> orders = new ArrayList<>(10);
+        for (int i = 1; i <= orderIds.size(); i++) {
+            Order order = new Order();
+            order.setUserId(i);
+            order.setStatus("update_TEST_batch");
+            orders.add(order);
+//            OrderItem item = new OrderItem();
+//            item.setOrderId(order.getOrderId());
+//            item.setUserId(i);
+//            item.setStatus("INSERT_TEST");
+//            orderItemRepository.insert(item);
+//            result.add(order.getOrderId());
+        }
+        orderRepository.batchUpdates(orders);
+
+       // return result;
+	}
+
+	@Override
     public void processFailure() {
         System.out.println("-------------- Process Failure Begin ---------------");
         insertData();

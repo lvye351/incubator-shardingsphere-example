@@ -67,4 +67,18 @@ public class OrderRepositoryImpl implements OrderRepository {
     public List<Order> selectAll() {
         return (List<Order>) entityManager.createQuery("SELECT o FROM OrderEntity o").getResultList();
     }
+
+	@Override
+	public void batchInserts(List<Order> orders) {
+		//entityManager.
+		
+		
+		
+	}
+
+	@Override
+	public void batchUpdates(List<Order> orders) {
+		// TODO Auto-generated method stub
+		
+	}
 }

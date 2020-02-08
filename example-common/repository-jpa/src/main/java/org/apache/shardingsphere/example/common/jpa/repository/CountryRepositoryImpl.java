@@ -18,6 +18,7 @@
 package org.apache.shardingsphere.example.common.jpa.repository;
 
 import org.apache.shardingsphere.example.common.entity.Country;
+import org.apache.shardingsphere.example.common.entity.Order;
 import org.apache.shardingsphere.example.common.repository.CountryRepository;
 import org.springframework.stereotype.Repository;
 
@@ -67,4 +68,16 @@ public class CountryRepositoryImpl implements CountryRepository {
     public List<Country> selectAll() {
         return (List<Country>) entityManager.createQuery("SELECT o FROM CountryEntity o").getResultList();
     }
+
+	@Override
+	public void batchInserts(List<Order> orders) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void batchUpdates(List<Order> orders) {
+		// TODO Auto-generated method stub
+		
+	}
 }

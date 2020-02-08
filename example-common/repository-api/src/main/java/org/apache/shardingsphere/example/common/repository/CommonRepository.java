@@ -19,6 +19,8 @@ package org.apache.shardingsphere.example.common.repository;
 
 import java.util.List;
 
+import org.apache.shardingsphere.example.common.entity.Order;
+
 public interface CommonRepository<T, P> {
     
     /**
@@ -42,6 +44,16 @@ public interface CommonRepository<T, P> {
      * @return count or primary key
      */
     Long insert(T entity);
+    /**
+     * 
+     * @param orders
+     */
+    void batchInserts(List<Order> orders);
+    /**
+     * 
+     * @param orders
+     */
+    void batchUpdates(List<Order> orders);
     
     /**
      * Do delete.

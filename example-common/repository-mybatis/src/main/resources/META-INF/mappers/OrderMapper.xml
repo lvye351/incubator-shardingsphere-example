@@ -23,6 +23,19 @@
         INSERT INTO t_order (user_id, status) VALUES (#{userId,jdbcType=INTEGER}, #{status,jdbcType=VARCHAR});
     </insert>
     
+    <insert id="batchInserts" parameterType="java.util.List">
+        insert into t_order(
+        user_id,
+        status
+        ) values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+            #{item.userId,jdbcType=INTEGER},
+            #{item.status,jdbcType=VARCHAR}
+            )
+        </foreach>
+    </insert>
+    
     <delete id="delete">
         DELETE FROM t_order WHERE order_id = #{orderId,jdbcType=INTEGER};
     </delete>
